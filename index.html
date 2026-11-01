@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RAMANI AI | Penetration Testing, AI and Security Tooling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#000;--panel:#0c0c0d;--line:#2a2a2d;--red:#d4141c;--red-d:#8f0d13;--white:#fff;--mute:#b4b4b8;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--ink);color:var(--white);font-family:"Manrope","Segoe UI",Helvetica,Arial,sans-serif;line-height:1.75;font-size:17px}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(0,0,0,.88);z-index:30}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:19px;letter-spacing:.08em}
+.logo img{display:block;height:30px;width:auto}
+nav{display:flex;gap:28px;font-size:15px;color:var(--mute)}
+nav a:hover{color:var(--white)}
+.hero{padding:88px 0 96px;border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+h1{font-size:clamp(34px,5.6vw,60px);line-height:1.15;font-weight:800;margin:0 0 24px}
+.lead{color:var(--mute);max-width:34em;margin:0 0 36px}
+.btn{display:inline-block;background:var(--red);color:var(--white);padding:12px 32px;font-weight:600;border:1px solid var(--red)}
+.btn:hover{background:var(--red-d);border-color:var(--red-d)}
+.btn.ghost{background:transparent;border-color:var(--white);margin-left:12px}
+.btn.ghost:hover{background:var(--white);color:var(--ink)}
+.radar{width:100%;max-width:420px;justify-self:center}
+.radar circle.r{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 2.2s ease-out forwards}
+.radar circle.r:nth-child(2){animation-delay:.25s}.radar circle.r:nth-child(3){animation-delay:.5s}
+.radar line{stroke:var(--line);stroke-width:1.5}
+.radar .sweep{stroke:var(--red);stroke-width:2;transform-origin:200px 200px;animation:spin 7s linear infinite}
+.radar .node{fill:var(--red)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+section{padding:88px 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(26px,4vw,38px);margin:0 0 20px;font-weight:800}
+h2::after{content:"";display:block;width:56px;height:3px;background:var(--red);margin-top:14px}
+p{margin:0 0 16px;color:var(--mute)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.vals{list-style:none;margin:0;padding:0}
+.vals li{padding:18px 0;border-bottom:1px solid var(--line)}
+.vals li:first-child{padding-top:0}
+.vals b{display:block;color:var(--white);font-weight:600}
+.vals span{color:var(--mute);font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.role{border-top:3px solid var(--red);background:var(--panel);padding:22px}
+.role h3{margin:0 0 6px;font-size:17px}
+.role p{margin:0;font-size:15px}
+.found{margin-top:64px}
+.found h3{margin:0 0 8px;font-size:22px}
+.names{display:flex;flex-wrap:wrap;gap:0;margin-top:24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.names span{flex:1 1 160px;padding:26px 20px;font-size:26px;font-weight:800;border-right:1px solid var(--line);text-align:center}
+.names span:last-child{border-right:0;color:var(--red)}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.rows a{display:block;padding:18px 0;border-bottom:1px solid var(--line)}
+.rows small{display:block;color:var(--mute)}
+.rows a:hover b{color:var(--red)}
+footer{padding:32px 0;color:var(--mute);font-size:14px}
+@media(max-width:860px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){
+  nav{gap:16px;font-size:14px}
+  .hero .wrap,.about,.contact{grid-template-columns:1fr;gap:36px}
+  .grid{grid-template-columns:1fr}
+  .radar{max-width:260px}
+  .btn.ghost{margin:12px 0 0}
+  .names span{flex-basis:50%;border-bottom:1px solid var(--line)}
+}
+@media(prefers-reduced-motion:reduce){.radar circle.r{animation:none;stroke-dashoffset:0}.radar .sweep{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+  <a class="logo" href="#top"><img src="data:image/webp;base64,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" alt="" width="38" height="30">RAMANI AI</a>
+  <nav><a href="#about">About</a><a href="#team">Team &amp; Work</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>Penetration testing, AI development and security tooling</h1>
+    <p class="lead">RAMANI AI is a cybersecurity company. We hack systems to test them, build AI, and write our own security tools.</p>
+    <a class="btn" href="#contact">Contact us</a><a class="btn ghost" href="#team">Our work</a>
+  </div>
+  <svg class="radar" viewBox="0 0 400 400" role="img" aria-label="Decorative radar graphic">
+    <circle class="r" cx="200" cy="200" r="190"/><circle class="r" cx="200" cy="200" r="130"/><circle class="r" cx="200" cy="200" r="70"/>
+    <line x1="10" y1="200" x2="390" y2="200"/><line x1="200" y1="10" x2="200" y2="390"/>
+    <line class="sweep" x1="200" y1="200" x2="200" y2="10"/>
+    <circle class="node" cx="285" cy="120" r="7"/>
+  </svg>
+</div></div>
+
+<section id="about"><div class="wrap about">
+  <div>
+    <h2>About us</h2>
+    <p>RAMANI AI works in offensive security and artificial intelligence. We find vulnerabilities in real systems, build AI solutions, and develop tools for security research.</p>
+    <p>The name Ramani comes from a clan of the ancient Shawankareh tribe.</p>
+  </div>
+  <ul class="vals">
+    <li><b>Hacking and penetration testing</b><span>Testing web applications, networks and infrastructure the way an attacker would.</span></li>
+    <li><b>AI development</b><span>Designing and building AI systems and AI-assisted security workflows.</span></li>
+    <li><b>Tool development</b><span>Custom tools and extensions for vulnerability discovery and security research.</span></li>
+  </ul>
+</div></section>
+
+<section id="team"><div class="wrap">
+  <h2>Team &amp; work</h2>
+  <div class="grid">
+    <div class="role"><h3>Penetration testers</h3><p>Manual testing of applications and infrastructure.</p></div>
+    <div class="role"><h3>Vulnerability researchers</h3><p>Finding flaws in widely used products and services.</p></div>
+    <div class="role"><h3>AI engineers</h3><p>Building and integrating AI systems.</p></div>
+    <div class="role"><h3>Tool developers</h3><p>Writing the tools our research runs on.</p></div>
+  </div>
+  <div class="found">
+    <h3>Vulnerabilities we have found at</h3>
+    <p>Our researchers have identified security vulnerabilities in the products and services of these organizations.</p>
+    <div class="names"><span>NASA</span><span>Apple</span><span>Bitdefender</span><span>Cisco</span><span>and more</span></div>
+  </div>
+</div></section>
+
+<section id="contact" style="border-bottom:0"><div class="wrap contact">
+  <div>
+    <h2>Contact us</h2>
+    <p>Tell us about your project and we will get back to you.</p>
+  </div>
+  <div class="rows">
+    <a href="mailto:info@example.com"><small>Email</small><b>info@example.com</b></a>
+    <a href="https://instagram.com/Ramani.AI" target="_blank" rel="noopener"><small>Instagram</small><b>@Ramani.AI</b></a>
+    <a href="https://t.me/Ramani.AI" target="_blank" rel="noopener"><small>Telegram</small><b>@Ramani.AI</b></a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">© 2026 RAMANI AI. All rights reserved.</div></footer>
+</body>
+</html>
